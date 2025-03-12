@@ -1,0 +1,77 @@
+class Usuario {
+    Long id;
+    String nombre;
+    String correo;
+    String contraseña;
+    String rol; // ADMIN, INSTRUCTOR, ALUMNO
+}
+
+class Alumno extends Usuario {
+    Date fechaNacimiento;
+    String genero;
+    String telefono;
+    String metodoPago;
+    List<Clase> clasesInscritas;
+}
+
+class Instructor extends Usuario {
+    List<Clase> clasesAsignadas;
+}
+
+class Administrador extends Usuario {
+    void gestionarUsuarios();
+    void gestionarPagos();
+    void generarReportes();
+}
+
+class Clase {
+    Long id;
+    String nivel;
+    Date horario;
+    Instructor instructor;
+    List<Alumno> alumnos;
+    void registrarAsistencia();
+}
+
+class Pago {
+    Long id;
+    Alumno alumno;
+    Double monto;
+    Date fechaPago;
+    String metodo;
+    Boolean estado; // Pagado o Pendiente
+}
+
+class Asistencia {
+    Long id;
+    Alumno alumno;
+    Clase clase;
+    Date fecha;
+    Boolean presente;
+}
+
+class InformacionInstitucional {
+    String mision;
+    String vision;
+    String valores;
+    List<String> servicios;
+    List<String> eventos;
+}
+
+// Relaciones
+Alumno "*" -- "*" Clase
+Instructor "1" -- "*" Clase
+Administrador "1" -- "*" Usuario
+Clase "1" -- "*" Asistencia
+Alumno "1" -- "*" Pago
+
+
+
+Pasos
+
+1. Crear entidades 
+2. Crear Controladores de cada entidade
+3. Crear Servicios para cada Controlador
+4. Crear Repositorios para cada Servicio
+
+
