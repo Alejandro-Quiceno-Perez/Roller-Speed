@@ -1,0 +1,64 @@
+Key : frameworks
+value : qwerty
+
+
+password : v5iwI304WLnX1C8a
+user name ; alejandroquiceno
+
+
+mongodb://alejandroquiceno:v5iwI304WLnX1C8a@rollerspeed-shard-00-02.ku0oo.mongodb.net:27017/?ssl=true&replicaSet=atlas-8b0lny-shard-0&authSource=admin&retryWrites=true&w=majority&appName=rollerspeed
+
+name frameworks_boris
+
+
+
+Alejo 
+Registro de Aspirantes
+
+Registro en línea con datos personales.
+
+Selección del método de pago.
+
+
+
+Alexis 
+Gestión de Alumnos
+
+Edición de perfil y consulta de estado de pagos.
+
+Acceso a horarios y notificaciones.
+
+
+
+Jose
+Gestión de Instructores
+
+Registro y administración de instructores.
+
+Asignación de instructores a clases.
+
+
+Pris 
+Gestión de Clases
+
+Programación de horarios y niveles.
+
+Visualización de clases asignadas.
+
+
+Alejo 
+Gestión de Pagos
+
+Registro de pagos según el método seleccionado.
+
+Notificación automática de pagos pendientes.
+
+Generación de reportes de pagos.
+
+
+Alexis 
+Registro de Asistencia
+
+Control de asistencia en cada clase por parte del instructor.
+
+Reportes de asistencia por alumno.
