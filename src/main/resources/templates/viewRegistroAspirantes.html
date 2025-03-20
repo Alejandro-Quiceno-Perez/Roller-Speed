@@ -24,24 +24,23 @@
                             <tr>
                                    <th>Id</th>
                                    <th>Nombre</th>
-                                   <th>Edad</th>
-                                   <th>Departamento</th>
+                                   <th>Apellido</th>
+                                   <th>Correo</th>
                                    <th>Acciones</th>
                             </tr>
                      </thead>
 
                      <tbody>
-                            <tr th:each="registroAspirantes : ${registroAspirantesList}">
+                            <tr th:each="registroAspirantes : ${listRegistroAspirantes}">
                                    <td th:text="${registroAspirantes.id}"></td>
                                    <td th:text="${registroAspirantes.name}"></td>
                                    <td th:text="${registroAspirantes.lastName}"></td>
                                    <td th:text="${registroAspirantes.email}"></td>
-                                   <td th:text="${registroAspirantes.password}"></td>
                                    <td class="w-25">
                                           <div class="d-flex gap-2">
-                                                 <a th:href="@{/delete/{id}(id=${coder.id})}"
+                                                 <a th:href="@{/registroAspirantes/delete/{id}(id=${registroAspirantes.id})}"
                                                         class="btn btn-danger">Eliminar</a>
-                                                 <a th:href="@{/update/{id}(id=${coder.id})}"
+                                                 <a th:href="@{/registroAspirantes/update/{id}(id=${registroAspirantes.id})}"
                                                         class="btn btn-primary">Actualizar</a>
                                           </div>
                                    </td>

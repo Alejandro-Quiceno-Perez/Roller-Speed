@@ -1,4 +1,5 @@
 package com.rollerspeed.rollerspeed.repository;
+
 import org.springframework.stereotype.Repository;
 
 import com.rollerspeed.rollerspeed.entity.RegistroAspirantes;

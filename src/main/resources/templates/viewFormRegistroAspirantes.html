@@ -16,7 +16,7 @@
               <form th:object="${registroAspirantes}" th:action="${action}" method="post">
                      <input type="hidden" th:field="*{id}" th:value="${registroAspirantes.id}" />
                      <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="name" placeholder="Nombre trabajador"
+                            <input type="text" class="form-control" id="name" placeholder="Nombre Aspirante"
                                    th:field="*{name}" th:value="${registroAspirantes.name}" />
                             <label for="name">Nombre</label>
                      </div>
