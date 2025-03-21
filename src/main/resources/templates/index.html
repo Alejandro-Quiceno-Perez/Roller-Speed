@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
        <meta charset="UTF-8">
@@ -46,6 +47,11 @@
                                    <button class="nav-link" id="pills-events-tab" data-bs-toggle="pill"
                                           data-bs-target="#pills-events" type="button" role="tab"
                                           aria-controls="pills-events" aria-selected="false">Eventos</button>
+                            </li>
+                            <li class="nav-item mx-2" role="presentation">
+                                   <button class="btn btn-warning" type="button" data-bs-toggle="offcanvas"
+                                          data-bs-target="#offcanvasWithBothOptions"
+                                          aria-controls="offcanvasWithBothOptions">Registros</button>
                             </li>
                             <li class="nav-item mx-2" role="presentation">
                                    <button class="btn btn-warning" type="button" data-bs-toggle="offcanvas"
@@ -340,6 +346,21 @@
               <div class="offcanvas-body">
                      <p><a href="/viewRegistroAspirante" class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Registrar Aspirantes</a></p>
                      <p><a href="/viewRegistroInstructor" class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Registrar Instructor</a></p>
+              </div>
+       </div>
+
+
+       <!-- Registro de personas -->
+
+
+       <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+              aria-labelledby="offcanvasWithBothOptionsLabel">
+              <div class="offcanvas-header">
+                     <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Formularios de Registros</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                     <p><a href="/viewRegistroAspirante" class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Registrar Aspirantes</a></p>
               </div>
        </div>
 
