@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import com.rollerspeed.rollerspeed.entity.RegistroAspirantes;
 import com.rollerspeed.rollerspeed.service.RegistroAspirantesService;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
