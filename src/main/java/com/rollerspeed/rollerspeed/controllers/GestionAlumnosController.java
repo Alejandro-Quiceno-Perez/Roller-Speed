@@ -10,12 +10,29 @@ import org.springframework.web.bind.annotation.*;
 import com.rollerspeed.rollerspeed.entity.GestionAlumnos;
 import com.rollerspeed.rollerspeed.service.GestionAlumnosService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Gestion Alumnos", description = "Operaciones sobre la gestion alumnos")
 @Controller
 @RequestMapping("/")
 public class GestionAlumnosController {
     @Autowired
        private GestionAlumnosService objGestionAlumnosService;
 
+     @Operation(
+        summary = "Obtener todos los usuarios",
+        description = "Devuelve una lista de usuarios registrados en un txt.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Lista la gestion alumnos",
+                content = @Content(schema = @Schema(implementation = GestionAlumnos.class))),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+        }
+    ) 
+    
        // Mostrar lista de registro de aspirantes
        @GetMapping("/viewGestionAlumnos")
        public String showViewGestionAlumnos(Model objModel) {
@@ -29,6 +46,15 @@ public class GestionAlumnosController {
               return "viewGestionAlumnos";
        }
 
+       @Operation(
+              summary = "Guardar registro de getion de alumnos",
+              description = "Realiza la creacion del registro en base de datos.",
+              responses = {
+                  @ApiResponse(responseCode = "200", description = "Guardo correctamente.",
+                      content = @Content(schema = @Schema(implementation = GestionAlumnos.class))),
+                  @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+              }
+          ) 
        // Mostrar formulario de registro de aspirantes
        @GetMapping("/viewFormGestionAlumnos")
        public String showViewFormGestionAlumnos(Model objModel) {
@@ -36,7 +62,15 @@ public class GestionAlumnosController {
               objModel.addAttribute("action", "/GestionAlumnos/create");
               return "viewFormGestionAlumnos";
        }
-
+       @Operation(
+              summary = "Eliminar regsitro de gestion de alumnos.",
+              description = "Devuelve id del regitro eliminado.",
+              responses = {
+                  @ApiResponse(responseCode = "200", description = "Eliminar de la gestion alumnos",
+                      content = @Content(schema = @Schema(implementation = GestionAlumnos.class))),
+                  @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+              }
+          ) 
        // Eliminar registro de aspirantes
        @GetMapping("/GestionAlumnos/delete/{id}")
        public String deleteAspitante(@PathVariable Long id) {
