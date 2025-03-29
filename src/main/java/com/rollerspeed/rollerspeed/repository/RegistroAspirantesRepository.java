@@ -8,5 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
 public interface RegistroAspirantesRepository extends JpaRepository<RegistroAspirantes, Long> {
+
        
 }

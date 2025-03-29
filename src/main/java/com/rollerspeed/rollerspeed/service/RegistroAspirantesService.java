@@ -18,6 +18,12 @@ public class RegistroAspirantesService {
        }
 
        public RegistroAspirantes save(RegistroAspirantes objRegistroAspirantes) {
+
+              return this.objRegistroAspirantesRepository.save(objRegistroAspirantes);
+       }
+       
+       public RegistroAspirantes guardar(RegistroAspirantes objRegistroAspirantes) {
+
               return this.objRegistroAspirantesRepository.save(objRegistroAspirantes);
        }
 
@@ -25,20 +31,19 @@ public class RegistroAspirantesService {
               this.objRegistroAspirantesRepository.deleteById(id);
        }
 
-
        public RegistroAspirantes update(Long id, RegistroAspirantes objRegistroAspirantes) {
               // Buscamos el registro de aspirantes por id
               RegistroAspirantes objRegistroAspirantesToUpdate = this.findById(id);
 
-              //Validamos la existencia del registro de aspirantes
-              if(objRegistroAspirantesToUpdate == null) {
+              // Validamos la existencia del registro de aspirantes
+              if (objRegistroAspirantesToUpdate == null) {
                      return null;
               }
 
-              //Actualizamos el registro de aspirantes con los nuevos datos
+              // Actualizamos el registro de aspirantes con los nuevos datos
               objRegistroAspirantesToUpdate = objRegistroAspirantes;
 
-              //Guardamos los cambios
+              // Guardamos los cambios
               return this.objRegistroAspirantesRepository.save(objRegistroAspirantesToUpdate);
        }
 

@@ -13,28 +13,28 @@
 <body>
        <h1 class="text-center my-5">Formulario Registro Aspirante</h1>
        <div class="container">
-              <form th:object="${registroAspirantes}" th:action="${action}" method="post">
-                     <input type="hidden" th:field="*{id}" th:value="${registroAspirantes.id}" />
+              <form th:object="${registroAspirantes}" th:action="@{${action}}" method="post">
+                     <input type="hidden" th:field="*{id}" />
                      <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="name" placeholder="Nombre Aspirante"
-                                   th:field="*{name}" th:value="${registroAspirantes.name}" />
+                                   th:field="*{name}" />
                             <label for="name">Nombre</label>
                      </div>
 
                      <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="lastName" placeholder="lastName" th:field="*{lastName}"
-                                   th:value="${registroAspirantes.lastName}" />
+                            <input type="text" class="form-control" id="lastName" placeholder="lastName"
+                                   th:field="*{lastName}" />
                             <label for="lastName">Apellido</label>
                      </div>
 
                      <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="email" placeholder="email" th:field="*{email}"
-                                   th:value="${registroAspirantes.email}" />
+                            <input type="text" class="form-control" id="email" placeholder="email"
+                                   th:field="*{email}" />
                             <label for="email">Correo</label>
                      </div>
                      <div class="form-floating mb-3">
                             <input type="password" class="form-control" id="password" placeholder="password"
-                                   th:field="*{password}" th:value="${registroAspirantes.password}" />
+                                   th:field="*{password}" />
                             <label for="password">Contraseña</label>
                      </div>
                      <!-- LINK th:href="@{/estilos/styles.css}" -->
@@ -43,7 +43,68 @@
                             <a href="/viewRegistroAspirante" class="btn btn-success">Cancelar</a>
                      </div>
               </form>
+
+              <!-- <form id="form" method="post">
+                     <input type="hidden" />
+                     <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="name" name="name"
+                                   placeholder="Nombre Aspirante" />
+                            <label for="name">Nombre</label>
+                     </div>
+
+                     <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="lastName" name="lastName"
+                                   placeholder="lastName" />
+                            <label for="lastName">Apellido</label>
+                     </div>
+
+                     <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="email" />
+                            <label for="email">Correo</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="password" name="password"
+                                   placeholder="password" />
+                            <label for="password">Contraseña</label>
+                     </div>
+                     LINK th:href="@{/estilos/styles.css}" 
+                     <div class="d-flex gap-4">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="/viewRegistroAspirante" class="btn btn-success">Cancelar</a>
+                     </div>
+              </form>
        </div>
+       <script>
+              const form
+
+              form.addEventListener('submit', (event) => {
+                     event.preventDefault();
+
+                     // Capturar datos del formulario correctamente
+                     const data = {
+                            name: document.getElementById("name").value,
+                            lastName: document.getElementById("lastName").value,
+                            email: document.getElementById("email").value,
+                            password: document.getElementById("password").value
+                     };
+
+                     console.log("Enviando datos:", data);
+
+                     fetch('/registroAspirantes/save', {
+                            method: 'POST',
+                            headers: {
+                                   'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data) // 🔹 Convertir a JSON correctamente
+                     })
+                            .then(response => response.json())
+                            .then(data => {
+                                   console.log("Respuesta del servidor:", data);
+                                   window.location.href = '/viewRegistroAspirante';
+                            })
+                            .catch(error => console.log("Error en la petición:", error));
+              });
+       </script> -->
 </body>
 
 </html>
