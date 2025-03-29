@@ -23,8 +23,16 @@ public class GestionAlumnosController {
     @Autowired
     private GestionAlumnosService objGestionAlumnosService;
 
-    @Operation(summary = "Obtener todos los usuarios", description = "Devuelve una lista de usuarios registrados en un txt.", responses = {
-            @ApiResponse(responseCode = "200", description = "Lista la gestion alumnos", content = @Content(schema = @Schema(implementation = GestionAlumnos.class))),
+
+
+
+       @Operation(
+        summary = "Obtener todos los alumnos",
+        description = "Devuelve una lista de alumnos registrados.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Lista obtenida exitosamente",
+                content = @Content(schema = @Schema(implementation = GestionAlumnos.class))),
+
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
 
@@ -37,52 +45,87 @@ public class GestionAlumnosController {
         // Agregar la lista al modelo
         objModel.addAttribute("listGestionAlumnos", listaGestionAlumnos);
 
+
         // Retornar el nombre de la vista
         return "viewGestionAlumnos";
     }
 
-    @Operation(summary = "Guardar registro de getion de alumnos", description = "Realiza la creacion del registro en base de datos.", responses = {
-            @ApiResponse(responseCode = "200", description = "Guardo correctamente.", content = @Content(schema = @Schema(implementation = GestionAlumnos.class))),
+
+       @Operation(
+        summary = "Mostrar formulario de registro de alumnos",
+        description = "Muestra el formulario para registrar un nuevo alumno.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Formulario mostrado correctamente"),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
-    // Mostrar formulario de registro de aspirantes
-    @GetMapping("/viewFormGestionAlumnos")
-    public String showViewFormGestionAlumnos(Model objModel) {
-        objModel.addAttribute("gestionAlumnos", new GestionAlumnos());
-        objModel.addAttribute("action", "/GestionAlumnos/create");
-        return "viewFormGestionAlumnos";
-    }
-
-    @Operation(summary = "Eliminar regsitro de gestion de alumnos.", description = "Devuelve id del regitro eliminado.", responses = {
-            @ApiResponse(responseCode = "200", description = "Eliminar de la gestion alumnos", content = @Content(schema = @Schema(implementation = GestionAlumnos.class))),
+        }
+    ) 
+       // Mostrar formulario de registro de aspirantes
+       @GetMapping("/viewFormGestionAlumnos")
+       public String showViewFormGestionAlumnos(Model objModel) {
+              objModel.addAttribute("gestionAlumnos", new GestionAlumnos());
+              objModel.addAttribute("action", "/GestionAlumnos/create");
+              return "viewFormGestionAlumnos";
+       }
+       @Operation(
+        summary = "Eliminar un alumno",
+        description = "Elimina un registro de alumno por su ID.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Alumno eliminado correctamente"),
+            @ApiResponse(responseCode = "404", description = "Alumno no encontrado"),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
-    // Eliminar registro de aspirantes
-    @GetMapping("/GestionAlumnos/delete/{id}")
-    public String deleteAspitante(@PathVariable Long id) {
-        this.objGestionAlumnosService.delete(id);
-        return "redirect:/viewGestionAlumnos";
-    }
+        }
+    ) 
+       // Eliminar registro de aspirantes
+       @GetMapping("/GestionAlumnos/delete/{id}")
+       public String deleteAspitante(@PathVariable Long id) {
+              this.objGestionAlumnosService.delete(id);
+              return "redirect:/viewGestionAlumnos";
+       }
 
-    // Actualizar registro de aspirantes
-    @GetMapping("/GestionAlumnos/update/{id}")
-    public String showFormUpdate(@PathVariable Long id, Model objModel) {
-        GestionAlumnos objGestionAlumnos = this.objGestionAlumnosService.findById(id);
-        objModel.addAttribute("gestionAlumnos", objGestionAlumnos);
-        objModel.addAttribute("action", "/GestionAlumnos/update/" + id);
-        return "viewFormGestionAlumnos";
-    }
-
-    @PostMapping("/GestionAlumnos/update/{id}")
-    public String postMethodName(@PathVariable Long id, @ModelAttribute GestionAlumnos objGestionAlumnos) {
-        this.objGestionAlumnosService.update(id, objGestionAlumnos);
-        return "redirect:/viewGestionAlumnos";
-    }
-
-    // Crear registro de aspirantes
-    @PostMapping("/GestionAlumnos/create")
-    public String createGestionAlumnos(@ModelAttribute GestionAlumnos objGestionAlumnos) {
-        this.objGestionAlumnosService.save(objGestionAlumnos);
-        return "redirect:/viewGestionAlumnos";
-    }
+       @Operation(
+        summary = "Mostrar formulario de edición",
+        description = "Muestra el formulario para actualizar los datos de un alumno.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Formulario de actualización mostrado correctamente"),
+            @ApiResponse(responseCode = "404", description = "Alumno no encontrado"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+        }
+    ) 
+       //Actualizar registro de aspirantes
+       @GetMapping("/GestionAlumnos/update/{id}")
+       public String showFormUpdate(@PathVariable Long id, Model objModel) {
+              GestionAlumnos objGestionAlumnos = this.objGestionAlumnosService.findById(id);
+              objModel.addAttribute("gestionAlumnos", objGestionAlumnos);
+              objModel.addAttribute("action", "/GestionAlumnos/update/" + id);
+              return "viewFormGestionAlumnos";
+       }
+       @Operation(
+        summary = "Actualizar datos de un alumno",
+        description = "Modifica los datos de un alumno existente en la base de datos.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Alumno actualizado correctamente"),
+            @ApiResponse(responseCode = "404", description = "Alumno no encontrado"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+        }
+    ) 
+       @PostMapping("/GestionAlumnos/update/{id}")
+       public String postMethodName(@PathVariable Long id, @ModelAttribute GestionAlumnos objGestionAlumnos) {
+              this.objGestionAlumnosService.update(id, objGestionAlumnos);
+              return "redirect:/viewGestionAlumnos";
+       }
+       
+       @Operation(
+        summary = "Registrar un nuevo alumno",
+        description = "Guarda un nuevo alumno en la base de datos.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Alumno registrado correctamente"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+        }
+    ) 
+       // Crear registro de aspirantes
+       @PostMapping("/GestionAlumnos/create")
+       public String createGestionAlumnos(@ModelAttribute GestionAlumnos objGestionAlumnos) {
+              this.objGestionAlumnosService.save(objGestionAlumnos);
+              return "redirect:/viewGestionAlumnos";
+       }
 }
