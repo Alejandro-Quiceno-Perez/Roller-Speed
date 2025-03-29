@@ -9,14 +9,24 @@ import org.springframework.web.bind.annotation.*;
 
 import com.rollerspeed.rollerspeed.entity.RegistroAspirantes;
 import com.rollerspeed.rollerspeed.service.RegistroAspirantesService;
-import org.springframework.web.bind.annotation.PostMapping;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
-
+@Tag(name = "Registro Aspirantes", description = "Operaciones sobre el registro de aspirantes")
 @Controller
 @RequestMapping("/")
 public class RegistroAspirantesController {
        @Autowired
        private RegistroAspirantesService objRegistroAspirantesService;
+
+       @Operation(summary = "Obtener todos los aspirantes", description = "Devuelve una lista de aspirantes registrados en un txt.", responses = {
+                     @ApiResponse(responseCode = "200", description = "Lista la gestion aspirantes", content = @Content(schema = @Schema(implementation = RegistroAspirantes.class))),
+                     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+       })
 
        // Mostrar lista de registro de aspirantes
        @GetMapping("/viewRegistroAspirante")
@@ -39,6 +49,11 @@ public class RegistroAspirantesController {
               return "viewFormRegistroAspirantes";
        }
 
+       @Operation(summary = "Eliminar regsitro de aspirantes.", description = "Devuelve id del regitro eliminado.", responses = {
+                     @ApiResponse(responseCode = "200", description = "Eliminar de la gestion aspirantes", content = @Content(schema = @Schema(implementation = RegistroAspirantes.class))),
+                     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+       })
+
        // Eliminar registro de aspirantes
        @GetMapping("/registroAspirantes/delete/{id}")
        public String deleteAspitante(@PathVariable Long id) {
@@ -46,7 +61,7 @@ public class RegistroAspirantesController {
               return "redirect:/viewRegistroAspirante";
        }
 
-       //Actualizar registro de aspirantes
+       // Actualizar registro de aspirantes
        @GetMapping("/registroAspirantes/update/{id}")
        public String showFormUpdate(@PathVariable Long id, Model objModel) {
               RegistroAspirantes objRegistroAspirantes = this.objRegistroAspirantesService.findById(id);
@@ -60,12 +75,25 @@ public class RegistroAspirantesController {
               this.objRegistroAspirantesService.update(id, objRegistroAspirantes);
               return "redirect:/viewRegistroAspirante";
        }
-       
 
        // Crear registro de aspirantes
-       @PostMapping("/registroAspirantes/create")
-       public String createRegistroAspirante(@ModelAttribute RegistroAspirantes objRegistroAspirantes) {
+       @PostMapping(value = "/registroAspirantes/create", consumes = "application/x-www-form-urlencoded")
+       public String createRegistroAspiranteForm(@ModelAttribute RegistroAspirantes objRegistroAspirantes) {
               this.objRegistroAspirantesService.save(objRegistroAspirantes);
+              System.out.println("Datos recibidos desde formulario HTML: " + objRegistroAspirantes);
+              return "redirect:/viewRegistroAspirante";
+       }
+
+
+       @Operation(summary = "Crear los aspirantes", description = "Devuelve una lista de aspirantes registrados en un txt.", responses = {
+                     @ApiResponse(responseCode = "200", description = "Lista la gestion aspirantes", content = @Content(schema = @Schema(implementation = RegistroAspirantes.class))),
+
+                     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+       })
+       @PostMapping(value = "/registroAspirantes/create", consumes = "application/json")
+       public String createRegistroAspiranteJson(@RequestBody RegistroAspirantes objRegistroAspirantes) {
+              this.objRegistroAspirantesService.save(objRegistroAspirantes);
+              System.out.println("Datos recibidos en JSON: " + objRegistroAspirantes);
               return "redirect:/viewRegistroAspirante";
        }
 

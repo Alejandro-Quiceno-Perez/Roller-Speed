@@ -21,7 +21,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/")
 public class GestionAlumnosController {
     @Autowired
-       private GestionAlumnosService objGestionAlumnosService;
+    private GestionAlumnosService objGestionAlumnosService;
+
+
+
 
        @Operation(
         summary = "Obtener todos los alumnos",
@@ -29,22 +32,24 @@ public class GestionAlumnosController {
         responses = {
             @ApiResponse(responseCode = "200", description = "Lista obtenida exitosamente",
                 content = @Content(schema = @Schema(implementation = GestionAlumnos.class))),
+
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-        }
-    ) 
-    
-       // Mostrar lista de registro de aspirantes
-       @GetMapping("/viewGestionAlumnos")
-       public String showViewGestionAlumnos(Model objModel) {
-              // Obtener la lista de registros de aspirantes desde el servicio
-              List<GestionAlumnos> listaGestionAlumnos = objGestionAlumnosService.findAll();
+    })
 
-              // Agregar la lista al modelo
-              objModel.addAttribute("listGestionAlumnos", listaGestionAlumnos);
+    // Mostrar lista de registro de aspirantes
+    @GetMapping("/viewGestionAlumnos")
+    public String showViewGestionAlumnos(Model objModel) {
+        // Obtener la lista de registros de aspirantes desde el servicio
+        List<GestionAlumnos> listaGestionAlumnos = objGestionAlumnosService.findAll();
 
-              // Retornar el nombre de la vista
-              return "viewGestionAlumnos";
-       }
+        // Agregar la lista al modelo
+        objModel.addAttribute("listGestionAlumnos", listaGestionAlumnos);
+
+
+        // Retornar el nombre de la vista
+        return "viewGestionAlumnos";
+    }
+
 
        @Operation(
         summary = "Mostrar formulario de registro de alumnos",
