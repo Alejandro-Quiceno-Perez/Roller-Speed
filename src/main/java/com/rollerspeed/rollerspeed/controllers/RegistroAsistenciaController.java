@@ -103,7 +103,16 @@ public class RegistroAsistenciaController {
               return "redirect:/viewRegistroAsistencia";
        }
        
-       @Operation(
+       
+       // Crear registro de aspirantes
+       @PostMapping(value = "/RegistroAsistencia/create", consumes = "application/x-www-form-urlencoded")
+       public String createRegistroAsistencia(@ModelAttribute RegistroAsistencia objRegistroAsistencia) {
+              this.obRegistroAsistenciaService.save(objRegistroAsistencia);
+              return "redirect:/viewRegistroAsistencia";
+       }
+
+
+@Operation(
               summary = "Crear un nuevo registro de asistencia",
               description = "Registra un nuevo registro de asistencia en la base de datos.",
               responses = {
@@ -111,9 +120,9 @@ public class RegistroAsistenciaController {
                   @ApiResponse(responseCode = "500", description = "Error interno del servidor")
               }
           )
-       // Crear registro de aspirantes
-       @PostMapping("/RegistroAsistencia/create")
-       public String createRegistroAsistencia(@ModelAttribute RegistroAsistencia objRegistroAsistencia) {
+
+       @PostMapping(value = "/RegistroAsistencia/create", consumes = "application/json")
+       public String createRegistroAsistenciaJson(@RequestBody RegistroAsistencia objRegistroAsistencia) {
               this.obRegistroAsistenciaService.save(objRegistroAsistencia);
               return "redirect:/viewRegistroAsistencia";
        }

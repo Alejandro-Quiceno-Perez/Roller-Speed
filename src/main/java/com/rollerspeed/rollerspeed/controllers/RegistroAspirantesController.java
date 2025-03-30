@@ -70,8 +70,20 @@ public class RegistroAspirantesController {
               return "viewFormRegistroAspirantes";
        }
 
-       @PostMapping("/registroAspirantes/update/{id}")
+       @PostMapping(value = "/registroAspirantes/update/{id}", consumes = "application/x-www-form-urlencoded")
        public String postMethodName(@PathVariable Long id, @ModelAttribute RegistroAspirantes objRegistroAspirantes) {
+              this.objRegistroAspirantesService.update(id, objRegistroAspirantes);
+              return "redirect:/viewRegistroAspirante";
+       }
+
+       @Operation(summary = "Actualizar los aspirantes", description = "Devuelve aspirante registrado para actualizarlo.", responses = {
+                     @ApiResponse(responseCode = "200", description = "Lista la gestion aspirantes", content = @Content(schema = @Schema(implementation = RegistroAspirantes.class))),
+
+                     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+       })
+
+       @PostMapping(value = "/registroAspirantes/update/{id}", consumes = "application/json")
+       public String postMethodNameJson(@PathVariable Long id, @RequestBody RegistroAspirantes objRegistroAspirantes) {
               this.objRegistroAspirantesService.update(id, objRegistroAspirantes);
               return "redirect:/viewRegistroAspirante";
        }
