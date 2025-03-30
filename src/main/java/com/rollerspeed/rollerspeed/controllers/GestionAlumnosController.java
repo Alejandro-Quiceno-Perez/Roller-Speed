@@ -51,14 +51,7 @@ public class GestionAlumnosController {
     }
 
 
-       @Operation(
-        summary = "Mostrar formulario de registro de alumnos",
-        description = "Muestra el formulario para registrar un nuevo alumno.",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Formulario mostrado correctamente"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-        }
-    ) 
+    
        // Mostrar formulario de registro de aspirantes
        @GetMapping("/viewFormGestionAlumnos")
        public String showViewFormGestionAlumnos(Model objModel) {
