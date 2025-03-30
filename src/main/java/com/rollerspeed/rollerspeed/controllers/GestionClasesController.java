@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import io.swagger.v3.oas.annotations.Operation;
 
 import com.rollerspeed.rollerspeed.entity.GestionClases;
 import com.rollerspeed.rollerspeed.entity.RegistroAspirantes;
 import com.rollerspeed.rollerspeed.service.GestionClasesService;
+
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +27,15 @@ public class GestionClasesController {
     private GestionClasesService objGestionClasesService;
 
     // Devuelve una lista con todos los objetos de tipo GestionClases de la base de datos
+    @Operation(
+        summary = "Listar una nueva gestión de clases",
+        description = "Lista una nueva gestión de clases en la base de datos",
+        responses ={
+            @ApiResponse(responseCode = "200", description = "Clases registrada correctamente"),
+            @ApiResponse(responseCode = "500", description = "Error al registrar la clase"),
+        }
+    )
+    
     @GetMapping("/viewGestionClases")
     public String showViewGestionClases(Model objModel) {
         //Obtener la lista de gestión de clases desde el servicio
@@ -45,6 +57,15 @@ public class GestionClasesController {
     }
     
     //Eliminar una gestión de clases
+    @Operation(
+        summary = "Eliminar una nueva gestión de clases",
+        description = "Elimina una nueva gestión de clases en la base de datos",
+        responses ={
+            @ApiResponse(responseCode = "200", description = "Clases registrada correctamente"),
+            @ApiResponse(responseCode = "500", description = "Error al registrar la clase"),
+        }
+    )
+
     @GetMapping("/gestionClases/delete/{id}")
     public String deleteClase(@PathVariable Long id) {
             this.objGestionClasesService.delete(id);
@@ -69,9 +90,25 @@ public class GestionClasesController {
 
 
     // Crea un objeto de tipo GestionClases en la base de datos
-    @PostMapping("/gestionClases/create")
+    @PostMapping(value = "/gestionClases/create", consumes = "application/x-www-form-urlencoded")
     public String createGestionClases(@ModelAttribute GestionClases objGestionClases) {
         this.objGestionClasesService.save(objGestionClases);
         return "redirect:/viewGestionClases";
     }
+
+    @Operation(
+        summary = "Crear una nueva gestión de clases",
+        description = "Crea una nueva gestión de clases en la base de datos",
+        responses ={
+            @ApiResponse(responseCode = "200", description = "Clases registrada correctamente"),
+            @ApiResponse(responseCode = "500", description = "Error al registrar la clase"),
+        }
+    )
+
+    @PostMapping(value = "/gestionClases/create", consumes = "application/json")
+    public String createGestionClasesJson(@RequestBody GestionClases objGestionClases) {
+        this.objGestionClasesService.save(objGestionClases);
+        return "redirect:/viewGestionClases";
+    }
 }
+
