@@ -114,17 +114,25 @@ public class GestionAlumnosController {
               return "redirect:/viewGestionAlumnos";
        }
        
-       @Operation(
+        
+       // Crear registro de aspirantes
+       @PostMapping(value = "/GestionAlumnos/create",consumes = "application/x-www-form-urlencoded")
+       public String createGestionAlumnos(@ModelAttribute GestionAlumnos objGestionAlumnos) {
+              this.objGestionAlumnosService.save(objGestionAlumnos);
+              return "redirect:/viewGestionAlumnos";
+       }
+
+@Operation(
         summary = "Registrar un nuevo alumno",
         description = "Guarda un nuevo alumno en la base de datos.",
         responses = {
             @ApiResponse(responseCode = "200", description = "Alumno registrado correctamente"),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
         }
-    ) 
-       // Crear registro de aspirantes
-       @PostMapping("/GestionAlumnos/create")
-       public String createGestionAlumnos(@ModelAttribute GestionAlumnos objGestionAlumnos) {
+    )
+
+       @PostMapping(value = "/GestionAlumnos/create",consumes = "application/json" )
+       public String createGestionAlumnosJson(@RequestBody GestionAlumnos objGestionAlumnos) {
               this.objGestionAlumnosService.save(objGestionAlumnos);
               return "redirect:/viewGestionAlumnos";
        }
