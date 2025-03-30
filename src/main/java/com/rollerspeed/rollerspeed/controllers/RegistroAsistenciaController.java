@@ -45,13 +45,7 @@ public class RegistroAsistenciaController {
               // Retornar el nombre de la vista
               return "viewRegistroAsistencia";
        }
-       @Operation(
-              summary = "Mostrar formulario de registro de asistencia",
-              description = "Muestra un formulario para registrar asistencia.",
-              responses = {
-                  @ApiResponse(responseCode = "200", description = "Formulario mostrado correctamente")
-              }
-          )
+       
        // Mostrar formulario de registro de aspirantes
        @GetMapping("/viewFormRegistroAsistencia")
        public String showViewFormRegistroAsistencia(Model objModel) {
