@@ -5,8 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.rollerspeed.rollerspeed.entity.RegistroInstructor.RegistroInstructor;
+
+import com.rollerspeed.rollerspeed.entity.RegistroInstructor;
 import com.rollerspeed.rollerspeed.service.RegistroInstructorService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @Controller
 @RequestMapping("/")
@@ -17,6 +23,10 @@ public class RegistroInstructorController {
 
        private RegistroInstructorService objRegistroInstructorService;
 
+       @Operation(summary = "Obtener todos los instructores", description = "Devuelve una lista de instructores registrados en un txt.", responses = {
+                     @ApiResponse(responseCode = "200", description = "Lista la gestion instructores", content = @Content(schema = @Schema(implementation = RegistroInstructor.class))),
+                     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+       })
 
        // Mostrar lista de registro de instructores
        @GetMapping("/viewRegistroInstructor")
@@ -33,6 +43,11 @@ public class RegistroInstructorController {
               objModel.addAttribute("action", "/registroInstructor/create");
               return "viewFormRegistroInstructor";
        }
+
+       @Operation(summary = "Eliminar los instructores", description = "Devuelve una lista de instructores eliminados en un txt.", responses = {
+                     @ApiResponse(responseCode = "200", description = "Lista la gestion instructores", content = @Content(schema = @Schema(implementation = RegistroInstructor.class))),
+                     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+       })
 
        // Eliminar registro del instructor
        @GetMapping("/registroInstructor/delete/{id}")
@@ -57,11 +72,22 @@ public class RegistroInstructorController {
               return "redirect:/viewRegistroInstructor";
 
        }
-       
-        // Crear registro de instructores
-        @PostMapping("/registroInstructor/create")
-        public String createRegistroInstructor(@ModelAttribute RegistroInstructor objRegistroInstructor) {
-               this.objRegistroInstructorService.save(objRegistroInstructor);
-               return "redirect:/viewRegistroInstructor";
-        }
+
+       // Crear registro de instructores
+       @PostMapping(value= "/registroInstructor/create", consumes = "application/x-www-form-urlencoded")
+       public String createRegistroInstructor(@ModelAttribute RegistroInstructor objRegistroInstructor) {
+              this.objRegistroInstructorService.save(objRegistroInstructor);
+              return "redirect:/viewRegistroInstructor";
+       }
+
+       @Operation(summary = "Crear regirtro de los instructores", description = "Devuelve una lista de instructores registrados en un txt.", responses = {
+                     @ApiResponse(responseCode = "200", description = "Lista la gestion instructores", content = @Content(schema = @Schema(implementation = RegistroInstructor.class))),
+                     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+       })
+       // Crear registro de instructores
+       @PostMapping(value= "/registroInstructor/create", consumes = "application/json")
+       public String createRegistroInstructorJson(@RequestBody RegistroInstructor objRegistroInstructor) {
+              this.objRegistroInstructorService.save(objRegistroInstructor);
+              return "redirect:/viewRegistroInstructor";
+       }
 }
