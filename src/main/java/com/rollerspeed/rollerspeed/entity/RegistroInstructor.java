@@ -1,4 +1,5 @@
-package com.rollerspeed.rollerspeed.entity.RegistroInstructor;
+package com.rollerspeed.rollerspeed.entity;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -10,6 +11,7 @@ import jakarta.persistence.GenerationType;
 @Table(name = "registro_instructor")
 
 public class RegistroInstructor {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 

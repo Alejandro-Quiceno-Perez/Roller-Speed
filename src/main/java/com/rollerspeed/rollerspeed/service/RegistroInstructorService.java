@@ -1,8 +1,8 @@
 package com.rollerspeed.rollerspeed.service;
 
 import org.springframework.stereotype.Service;
-import com.rollerspeed.rollerspeed.entity.RegistroInstructor.RegistroInstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.rollerspeed.rollerspeed.entity.RegistroInstructor;
 import com.rollerspeed.rollerspeed.repository.RegistroInstructorRepository;
 import java.util.List;
 
