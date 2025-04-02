@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.v3.oas.annotations.Operation;
 
 import com.rollerspeed.rollerspeed.entity.GestionClases;
-import com.rollerspeed.rollerspeed.entity.RegistroAspirantes;
+// import com.rollerspeed.rollerspeed.entity.RegistroAspirantes;
 import com.rollerspeed.rollerspeed.service.GestionClasesService;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

@@ -31,7 +31,6 @@
         <thead>
           <tr>
             <th>Id</th>
-            <th>Rol</th>
             <th>Fecha Nacimiento</th>
             <th>Genero</th>
             <th>Telefono</th>
@@ -43,7 +42,6 @@
         <tbody>
           <tr th:each="gestionAlumnos : ${listGestionAlumnos}">
             <td th:text="${gestionAlumnos.idGestionAlumnos}"></td>
-            <td th:text="${gestionAlumnos.rol}"></td>
             <td th:text="${gestionAlumnos.fechaNacimiento}"></td>
             <td th:text="${gestionAlumnos.genero}"></td>
             <td th:text="${gestionAlumnos.telefono}"></td>

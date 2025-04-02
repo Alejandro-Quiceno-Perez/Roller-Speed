@@ -5,24 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rollerspeed.rollerspeed.entity.RegistroAspirantes;
-import com.rollerspeed.rollerspeed.repository.RegistroAspirantesRepository;
+import com.rollerspeed.rollerspeed.entity.Usuario;
+import com.rollerspeed.rollerspeed.repository.UsuarioRepository;
 
 @Service
-public class RegistroAspirantesService {
+public class UsuarioService {
        @Autowired
-       private RegistroAspirantesRepository objRegistroAspirantesRepository;
+       private UsuarioRepository objRegistroAspirantesRepository;
 
-       public List<RegistroAspirantes> findAll() {
+       public List<Usuario> findAll() {
               return this.objRegistroAspirantesRepository.findAll();
        }
 
-       public RegistroAspirantes save(RegistroAspirantes objRegistroAspirantes) {
+       public Usuario save(Usuario objRegistroAspirantes) {
 
               return this.objRegistroAspirantesRepository.save(objRegistroAspirantes);
        }
        
-       public RegistroAspirantes guardar(RegistroAspirantes objRegistroAspirantes) {
+       public Usuario guardar(Usuario objRegistroAspirantes) {
 
               return this.objRegistroAspirantesRepository.save(objRegistroAspirantes);
        }
@@ -31,9 +31,9 @@ public class RegistroAspirantesService {
               this.objRegistroAspirantesRepository.deleteById(id);
        }
 
-       public RegistroAspirantes update(Long id, RegistroAspirantes objRegistroAspirantes) {
+       public Usuario update(Long id, Usuario objRegistroAspirantes) {
               // Buscamos el registro de aspirantes por id
-              RegistroAspirantes objRegistroAspirantesToUpdate = this.findById(id);
+              Usuario objRegistroAspirantesToUpdate = this.findById(id);
 
               // Validamos la existencia del registro de aspirantes
               if (objRegistroAspirantesToUpdate == null) {
@@ -47,7 +47,7 @@ public class RegistroAspirantesService {
               return this.objRegistroAspirantesRepository.save(objRegistroAspirantesToUpdate);
        }
 
-       public RegistroAspirantes findById(Long id) {
+       public Usuario findById(Long id) {
               return this.objRegistroAspirantesRepository.findById(id).orElse(null);
        }
 }
