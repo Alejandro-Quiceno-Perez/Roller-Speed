@@ -12,9 +12,9 @@
 
 <body>
        <header class="container my-5 d-flex justify-content-between align-items-center">
-              <h1 class="fw-bold text-center">Listado de Aspirantes</h1>
+              <h1 class="fw-bold text-center">Listado de Usuarios</h1>
               <div class="">
-                     <a href="/viewFormRegistroAspirantes" class="btn btn-warning m-0">Crear registro</a>
+                     <a href="/viewFormUsuarios" class="btn btn-warning m-0">Crear registro</a>
                      <a href="/" class="btn btn-primary m-0">Inicio</a>
               </div>
        </header>
@@ -26,21 +26,23 @@
                                    <th>Nombre</th>
                                    <th>Apellido</th>
                                    <th>Correo</th>
+                                   <th>Rol</th>
                                    <th>Acciones</th>
                             </tr>
                      </thead>
 
                      <tbody>
-                            <tr th:each="registroAspirantes : ${listRegistroAspirantes}">
-                                   <td th:text="${registroAspirantes.id}"></td>
-                                   <td th:text="${registroAspirantes.name}"></td>
-                                   <td th:text="${registroAspirantes.lastName}"></td>
-                                   <td th:text="${registroAspirantes.email}"></td>
+                            <tr th:each="registroUsuarios : ${listUser}">
+                                   <td th:text="${registroUsuarios.id}"></td>
+                                   <td th:text="${registroUsuarios.name}"></td>
+                                   <td th:text="${registroUsuarios.lastName}"></td>
+                                   <td th:text="${registroUsuarios.email}"></td>
+                                   <td th:text="${registroUsuarios.rol}"></td>
                                    <td class="w-25">
                                           <div class="d-flex gap-2">
-                                                 <a th:href="@{/registroAspirantes/delete/{id}(id=${registroAspirantes.id})}"
+                                                 <a th:href="@{/registroUsuarios/delete/{id}(id=${registroUsuarios.id})}"
                                                         class="btn btn-danger">Eliminar</a>
-                                                 <a th:href="@{/registroAspirantes/update/{id}(id=${registroAspirantes.id})}"
+                                                 <a th:href="@{/registroUsuarios/update/{id}(id=${registroUsuarios.id})}"
                                                         class="btn btn-primary">Actualizar</a>
                                           </div>
                                    </td>
