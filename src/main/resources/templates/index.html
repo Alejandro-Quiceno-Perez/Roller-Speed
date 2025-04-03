@@ -61,10 +61,9 @@
 
         </li>
         <li class="nav-item mx-2" role="presentation">
-          <button class="btn btn-success" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
-            Login
-          </button>
+          <form th:action="@{/logout}" method="post">
+            <button type="submit">Cerrar Sesión</button>
+          </form>
 
         </li>
       </ul>
@@ -330,7 +329,8 @@
           Usuario</a>
       </p>
       <p>
-        <a href="/viewGestionClases" class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">
+        <a href="/viewGestionClases"
+          class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">
           Gestion Clases</a>
       </p>
       <p>

@@ -1,13 +1,12 @@
 package com.rollerspeed.rollerspeed.entity;
 
-import jakarta.persistence.CascadeType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -41,5 +40,8 @@ public class Usuario {
        @NotBlank(message = "El rol no puede estar vacío")
        private String rol;
 
-
+       // Método para encriptar la contraseña antes de guardar en la BD
+       public void setPassword(String password) {
+              this.password = new BCryptPasswordEncoder().encode(password);
+       }
 }
