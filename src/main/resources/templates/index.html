@@ -323,28 +323,28 @@
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <p>
+      <p sec:authorize="hasRole('ADMINISTRADOR')">
         <a href="/viewUsuarios"
           class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Registrar
           Usuario</a>
       </p>
-      <p>
+      <p sec:authorize="hasRole('ADMINISTRADOR')">
         <a href="/viewGestionClases"
           class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">
           Gestion Clases</a>
       </p>
-      <p>
+      <p sec:authorize="hasRole('ADMINISTRADOR')">
         <a href="/viewGestionAlumnos"
           class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Gestión de
           Alumnos
         </a>
       </p>
-      <p>
+      <p sec:authorize="hasRole('ADMINISTRADOR')">
         <a href="/viewRegistroAsistencia"
           class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Registro de
           Asistencia</a>
       </p>
-      <p>
+      <p sec:authorize="hasRole('ADMINISTRADOR')">
         <a href="/viewRegistroInstructor"
           class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">
           Registro instructor</a>

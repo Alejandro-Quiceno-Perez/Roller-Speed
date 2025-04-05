@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LoginController {
-       @GetMapping("/login")
+       @GetMapping("/viewLogin")
        public String login() {
-              return "/index"; // Retorna la vista de inicio de sesión
+              return "index"; // Retorna la vista de inicio de sesión
        }
 
-       @GetMapping("/logout")
-       public String logout() {
-              return "/login"; // Redirige a la página de inicio de sesión después de cerrar sesión
-       }
+       // @GetMapping("/logout")
+       // public String logout() {
+       //        return "login"; // Redirige a la página de inicio de sesión después de cerrar sesión
+       // }
 }

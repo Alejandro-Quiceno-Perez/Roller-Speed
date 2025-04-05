@@ -3,6 +3,7 @@ package com.rollerspeed.rollerspeed.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class UsuarioController {
        })
 
        // Mostrar lista de registro de aspirantes
+       
        @GetMapping("/viewUsuarios")
        public String showViewRegistroAspirante(Model objModel) {
               // Obtener la lista de registros de aspirantes desde el servicio
@@ -42,6 +44,7 @@ public class UsuarioController {
        }
 
        // Mostrar formulario de registro de aspirantes
+       
        @GetMapping("/viewFormUsuarios")
        public String showViewFormRegistroAspirante(Model objModel) {
               objModel.addAttribute("registroUsuarios", new Usuario());
@@ -54,13 +57,14 @@ public class UsuarioController {
                      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
        })
 
+       
        // Eliminar registro de aspirantes
        @GetMapping("/registroUsuarios/delete/{id}")
        public String deleteAspitante(@PathVariable Long id) {
               this.objUsuarioService.delete(id);
               return "redirect:/viewUsuarios";
        }
-
+       
        // Actualizar registro de aspirantes
        @GetMapping("/registroUsuarios/update/{id}")
        public String showFormUpdate(@PathVariable Long id, Model objModel) {
@@ -70,6 +74,7 @@ public class UsuarioController {
               return "viewFormUsuarios";
        }
 
+       
        @PostMapping(value = "/registroUsuarios/update/{id}", consumes = "application/x-www-form-urlencoded")
        public String postMethodName(@PathVariable Long id, @ModelAttribute Usuario objUsuario) {
               this.objUsuarioService.update(id, objUsuario);
@@ -82,6 +87,7 @@ public class UsuarioController {
                      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
        })
 
+       
        @PostMapping(value = "/registroUsuarios/update/{id}", consumes = "application/json")
        public String postMethodNameJson(@PathVariable Long id, @RequestBody Usuario objUsuario) {
               this.objUsuarioService.update(id, objUsuario);
@@ -89,6 +95,7 @@ public class UsuarioController {
        }
 
        // Crear registro de aspirantes
+       
        @PostMapping(value = "/registroUsuarios/create", consumes = "application/x-www-form-urlencoded")
        public String createRegistroAspiranteForm(@ModelAttribute Usuario objUsuario) {
               this.objUsuarioService.save(objUsuario);
@@ -96,12 +103,13 @@ public class UsuarioController {
               return "redirect:/viewUsuarios";
        }
 
-
        @Operation(summary = "Crear los aspirantes", description = "Devuelve una lista de aspirantes registrados en un txt.", responses = {
                      @ApiResponse(responseCode = "200", description = "Lista la gestion aspirantes", content = @Content(schema = @Schema(implementation = Usuario.class))),
 
                      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
        })
+
+       
        @PostMapping(value = "/registroUsuarios/create", consumes = "application/json")
        public String createRegistroAspiranteJson(@RequestBody Usuario objUsuario) {
               this.objUsuarioService.save(objUsuario);

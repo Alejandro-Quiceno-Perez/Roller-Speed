@@ -1,7 +1,12 @@
 package com.rollerspeed.rollerspeed.entity;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import java.util.Collection;
+import java.util.List;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +25,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 // @Inheritance(strategy = InheritanceType.JOINED)
-public class Usuario {
+public class Usuario implements UserDetails {
        @Id
        @GeneratedValue(strategy = GenerationType.IDENTITY)
        private Long id;
@@ -43,5 +48,15 @@ public class Usuario {
        // Método para encriptar la contraseña antes de guardar en la BD
        public void setPassword(String password) {
               this.password = new BCryptPasswordEncoder().encode(password);
+       }
+
+       @Override
+       public String getUsername() {
+              return this.email;
+       }
+
+       @Override
+       public Collection<? extends GrantedAuthority> getAuthorities() {
+              return List.of(new SimpleGrantedAuthority(this.rol));
        }
 }
