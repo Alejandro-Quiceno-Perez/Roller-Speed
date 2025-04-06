@@ -3,13 +3,14 @@ package com.rollerspeed.rollerspeed.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.rollerspeed.rollerspeed.entity.Usuario;
 import com.rollerspeed.rollerspeed.repository.UsuarioRepository;
 
 @Service
-public class UsuarioService {
+public class UsuarioService  {
        @Autowired
        private UsuarioRepository objRegistroAspirantesRepository;
 
@@ -21,7 +22,7 @@ public class UsuarioService {
 
               return this.objRegistroAspirantesRepository.save(objRegistroAspirantes);
        }
-       
+
        public Usuario guardar(Usuario objRegistroAspirantes) {
 
               return this.objRegistroAspirantesRepository.save(objRegistroAspirantes);
@@ -49,5 +50,9 @@ public class UsuarioService {
 
        public Usuario findById(Long id) {
               return this.objRegistroAspirantesRepository.findById(id).orElse(null);
+       }
+
+       public Usuario findByEmail(String email) {
+              return this.objRegistroAspirantesRepository.findByEmail(email).orElse(null);
        }
 }
