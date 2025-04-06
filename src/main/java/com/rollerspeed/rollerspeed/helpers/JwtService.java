@@ -22,7 +22,7 @@ public class JwtService {
        // private static final String SECRET_KEY = Base64.getEncoder().encodeToString("rollerspeed-secret-key-123456".getBytes());
 
        // Clave en base64 (mínimo 256 bits para HS256)
-       private static final String SECRET_KEY = "GpCSjL3o5sPtTcsECtEG5rS8RlqQmYXKoJ0zTldu2x8=";
+       private static final String SECRET_KEY = "$2a$10$5ldnVj9ZEXsQy/ef0WRzve74nqp03pgFMvTwDOIoT99IdD7txUWeS";
 
        private SecretKey getKey() {
               byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
